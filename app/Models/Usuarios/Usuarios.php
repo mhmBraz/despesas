@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\User;
+namespace App\Models\Usuarios;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements JWTSubject
+class Usuarios extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
@@ -21,7 +21,7 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    protected $table = 'public.user';
+    protected $table = 'usuarios';
 
     protected $primaryKey = 'id';
 
@@ -31,9 +31,7 @@ class User extends Authenticatable implements JWTSubject
 
     protected $fillable = [
         'id',
-        'person_id',
         'login',
         'password',
-        'created_at',
     ];
 }

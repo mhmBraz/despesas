@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\User\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Login\LoginController;
+use App\Http\Controllers\Usuario\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [UserController::class, 'login'])
-    ->name('user.store');
+//public
+Route::get('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout']);
+Route::post('/store', [UsuarioController::class, 'store']);
 
-Route::post('/logout', [UserController::class, 'logout'])
-->name('user.store');
 
-Route::group(['middleware' => 'auth-jwt'], function(){
-    Route::post('/store', [UserController::class, 'me'])
-    ->name('user.store');
+Route::group(['middleware' => 'auth-jwt'], function () {
+    Route::resource('users', UsuarioController::class, [
+        'only' => ['show', 'update', 'destroy']
+    ]);
 });

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller {
-     /**
+class LoginController extends Controller
+{
+    /**
      * Get a JWT via given credentials.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -14,7 +15,7 @@ class UserController extends Controller {
     {
         $credentials = request(['login', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
