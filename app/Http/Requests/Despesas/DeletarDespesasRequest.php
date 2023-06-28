@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Usuario;
+namespace App\Http\Requests\Despesas;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class EditarUsuarioRequest extends FormRequest
+class DeletarDespesasRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,7 @@ class EditarUsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'login'    => 'required|string',
-            'password' => 'required|string',
+            'id' => 'required|uuid',
         ];
     }
 
@@ -57,8 +56,7 @@ class EditarUsuarioRequest extends FormRequest
     public function attributes()
     {
         return [
-            'login'     => 'Login',
-            'passoword' => 'Senha'
+            'login'    => 'Id',
         ];
     }
 

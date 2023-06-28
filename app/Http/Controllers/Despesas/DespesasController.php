@@ -3,39 +3,33 @@
 namespace App\Http\Controllers\Despesas;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Despesas\CriarDespesasRequest;
+use App\Http\Requests\Despesas\DeletarDespesasRequest;
+use App\Http\Requests\Despesas\EditarDespesasRequest;
+use App\Http\Requests\Despesas\VerDespesasRequest;
+use App\Services\Despesas\CriarDespesasService;
+use App\Services\Despesas\DeletarDespesasService;
+use App\Services\Despesas\EditarDespesasService;
+use App\Services\Despesas\VerDespesasService;
+use Illuminate\Support\Facades\Response;
 
 class DespesasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CriarDespesasRequest $request)
     {
-        //
+        $criarUsuarioService = new CriarDespesasService();
+        $criarUsuarioService->handler($request->all());
+
+        return Response::json([
+            'success' => true,
+            'message' => 'Sucesso, despesa cadastrada com sucesso',
+        ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -44,20 +38,15 @@ class DespesasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(VerDespesasRequest $request)
     {
-        //
-    }
+        $criarUsuarioService = new VerDespesasService();
+        $criarUsuarioService->handler($request->all());
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Response::json([
+            'success' => true,
+            'message' => 'Sucesso, usuário cadastrado com sucesso',
+        ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -67,9 +56,15 @@ class DespesasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditarDespesasRequest $request)
     {
-        //
+        $criarUsuarioService = new EditarDespesasService();
+        $criarUsuarioService->handler($request->all());
+
+        return Response::json([
+            'success' => true,
+            'message' => 'Sucesso, usuário cadastrado com sucesso',
+        ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -78,8 +73,14 @@ class DespesasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(DeletarDespesasRequest $request)
     {
-        //
+        $criarUsuarioService = new DeletarDespesasService();
+        $criarUsuarioService->handler($request->all());
+
+        return Response::json([
+            'success' => true,
+            'message' => 'Sucesso, usuário cadastrado com sucesso',
+        ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }
