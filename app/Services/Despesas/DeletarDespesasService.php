@@ -3,9 +3,7 @@
 namespace App\Services\Despesas;
 
 use App\Models\Despesas\Despesas;
-use App\Repositories\Despesas\DespesasRepo;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Support\Arr;
 
 class DeletarDespesasService
 {
