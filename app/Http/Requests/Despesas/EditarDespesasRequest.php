@@ -28,7 +28,7 @@ class EditarDespesasRequest extends FormRequest
         return [
             'descricao'  => 'required|string',
             'data'       => 'required|string',
-            'valor'      => 'required|number'
+            'valor'      => 'required|numeric'
         ];
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Models\Despesas;
 
-use App\Models\User\Usuarios;
+use App\Models\Usuarios\Usuarios;
 use Illuminate\Database\Eloquent\Model;
 
 class Despesas extends Model
@@ -24,8 +24,8 @@ class Despesas extends Model
         'valor'
     ];
 
-    public function usuarios()
+    public function usuario()
     {
-        return $this->hasOne(Usuarios::class);
+        return $this->hasOne(Usuarios::class, 'id', 'usuario_id');
     }
 }

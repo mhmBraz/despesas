@@ -41,11 +41,12 @@ class DespesasController extends Controller
     public function show(VerDespesasRequest $request)
     {
         $criarUsuarioService = new VerDespesasService();
-        $criarUsuarioService->handler($request->all());
+        $despesa = $criarUsuarioService->handler($request->all());
 
         return Response::json([
             'success' => true,
-            'message' => 'Sucesso, usuário cadastrado com sucesso',
+            'message' => 'Sucesso',
+            'data' => $despesa
         ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
@@ -63,7 +64,7 @@ class DespesasController extends Controller
 
         return Response::json([
             'success' => true,
-            'message' => 'Sucesso, usuário cadastrado com sucesso',
+            'message' => 'Sucesso, despesa editada com sucesso',
         ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
@@ -80,7 +81,7 @@ class DespesasController extends Controller
 
         return Response::json([
             'success' => true,
-            'message' => 'Sucesso, usuário cadastrado com sucesso',
+            'message' => 'Sucesso, despesa deletada com sucesso',
         ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }

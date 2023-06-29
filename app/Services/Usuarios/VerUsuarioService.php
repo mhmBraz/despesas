@@ -19,7 +19,7 @@ class VerUsuarioService
 
         try {
             $usuarioRepo = new UsuarioRepo();
-            return $usuarioRepo->usuarioPorLogin(Arr::get($options, 'login'));
+            return $usuarioRepo->usuarioPorId(Arr::get($options, 'id'));
         } catch (\Throwable $th) {
             throw new HttpResponseException(response()->json([
                 'message' => 'Erro, entre em contato com o Administrador.',

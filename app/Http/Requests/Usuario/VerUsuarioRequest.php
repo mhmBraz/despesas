@@ -26,7 +26,7 @@ class VerUsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'login'    => 'required|string',
+            'id' => 'required|string',
         ];
     }
 
@@ -56,7 +56,7 @@ class VerUsuarioRequest extends FormRequest
     public function attributes()
     {
         return [
-            'login'    => 'Login',
+            'id' => 'Id',
         ];
     }
 

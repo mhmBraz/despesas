@@ -10,22 +10,21 @@ class DespesasRepo
 {
     public function verDespesa(array $options = null)
     {
-        return Despesas::query()->where('id', '=', Arr::get($options, 'id'))->first();
+        return Despesas::query()->where('id', '=', Arr::get($options, 'id'))->with(['usuario'])->first();
     }
 
     public function update(array $options)
     {
-        $despesa = $this->verDespesa(Arr::get($options, 'id'));
+        $despesa = $this->verDespesa($options);
         $despesa->descricao = Arr::get($options, 'descricao');
         $despesa->data = Arr::get($options, 'data');
-        $despesa->usuario_id = Arr::get($options, 'usuario_id');
         $despesa->valor = Arr::get($options, 'valor');
         $despesa->save();
     }
 
     public function delete(array $options)
     {
-        $despesa = $this->verDespesa(Arr::get($options, 'id'));
+        $despesa = $this->verDespesa($options);
         $despesa->save();
     }
 

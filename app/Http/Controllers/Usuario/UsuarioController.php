@@ -45,6 +45,7 @@ class UsuarioController extends Controller
 
         return Response::json([
             'success' => true,
+            'message' => 'Sucesso',
             'data' => $data
         ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
