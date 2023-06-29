@@ -7,9 +7,9 @@ use Illuminate\Support\Arr;
 
 class ChecarUsuarioService
 {
-    static function handler(array $options)
+    static function handler($idUsuario)
     {
-        if (auth()->payload()->get('sub') != Arr::get($options, 'id')) {
+        if (auth()->payload()->get('sub') != $idUsuario) {
             throw new HttpResponseException(response()->json([
                 'message' => 'Erro, Você não tem permissão.',
                 'success' => false

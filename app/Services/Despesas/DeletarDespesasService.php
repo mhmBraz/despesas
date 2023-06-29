@@ -2,18 +2,18 @@
 
 namespace App\Services\Despesas;
 
-use App\Models\Despesas\Despesas;
+use App\Repositories\Despesas\DespesasRepo;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class DeletarDespesasService
 {
-    public function handler(array $options)
+    public function handler($idDespesa)
     {
-        ChecarUsuarioDespesasService::handler($options);
+        ChecarUsuarioDespesasService::handler($idDespesa);
 
         try {
-            $despesasRepo = new Despesas();
-            $despesasRepo->delete($options);
+            $despesasRepo = new DespesasRepo();
+            $despesasRepo->delete($idDespesa);
         } catch (\Throwable $th) {
 
             throw new HttpResponseException(response()->json([

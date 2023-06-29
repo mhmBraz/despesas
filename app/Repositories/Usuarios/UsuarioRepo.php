@@ -13,6 +13,11 @@ class UsuarioRepo
         return Usuarios::query()->where('id', '=', $id)->first();
     }
 
+    public function usuarioPorEmail($email)
+    {
+        return Usuarios::query()->where('email', '=', $email)->first();
+    }
+
     public function usuarioPorLogin($login)
     {
         return Usuarios::query()->where('login', '=', $login)->first();
@@ -20,15 +25,9 @@ class UsuarioRepo
 
     public function update(array $options)
     {
-        $usuario = $this->usuarioPorId(Arr::get($options, 'id'));
+        $usuario = $this->usuarioPorId(Arr::get($options, 'idUsuario'));
         $usuario->password = Arr::get($options, 'password');
         $usuario->save();
-    }
-
-    public function delete(array $options)
-    {
-        $usuario = $this->usuarioPorId(Arr::get($options, 'id'));
-        $usuario->delete();
     }
 
     public function store(array $options)
@@ -37,6 +36,7 @@ class UsuarioRepo
         $usuario->id = Str::uuid();
         $usuario->login = Arr::get($options, 'login');
         $usuario->password = Arr::get($options, 'password');
+        $usuario->email = Arr::get($options, 'email');
         $usuario->save();
     }
 }

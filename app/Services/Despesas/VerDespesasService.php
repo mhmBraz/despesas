@@ -6,11 +6,11 @@ use App\Repositories\Despesas\DespesasRepo;
 
 class VerDespesasService
 {
-    public function handler(array $options)
+    public function handler($idDespesa)
     {
-        ChecarUsuarioDespesasService::handler($options);
+        ChecarUsuarioDespesasService::handler($idDespesa);
 
         $despesasRepo = new DespesasRepo();
-        return $despesasRepo->verDespesa($options)->toArray();
+        return $despesasRepo->verDespesa($idDespesa)->toArray();
     }
 }

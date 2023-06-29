@@ -8,11 +8,11 @@ use Illuminate\Support\Arr;
 
 class ChecarUsuarioDespesasService
 {
-    static function handler(array $options)
+    static function handler($idDespesa)
     {
         try {
             $despesasRepo = new DespesasRepo();
-            $despesa = $despesasRepo->verDespesa($options)->toArray();
+            $despesa = $despesasRepo->verDespesa($idDespesa)->toArray();
         } catch (\Throwable $th) {
             throw new HttpResponseException(response()->json([
                 'message' => 'Erro, entre em contato com o Administrador.',

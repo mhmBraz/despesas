@@ -8,13 +8,13 @@ use Illuminate\Support\Arr;
 
 class VerUsuarioService
 {
-    public function handler(array $options)
+    public function handler($idUsuario)
     {
-        ChecarUsuarioService::handler($options);
+        ChecarUsuarioService::handler($idUsuario);
 
         try {
             $usuarioRepo = new UsuarioRepo();
-            return $usuarioRepo->usuarioPorId(Arr::get($options, 'id'));
+            return $usuarioRepo->usuarioPorId($idUsuario);
         } catch (\Throwable $th) {
             throw new HttpResponseException(response()->json([
                 'message' => 'Erro, entre em contato com o Administrador.',

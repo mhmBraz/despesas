@@ -25,9 +25,7 @@ class DeletarDespesasRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'id' => 'required|uuid',
-        ];
+        return [];
     }
 
     /**
@@ -55,9 +53,7 @@ class DeletarDespesasRequest extends FormRequest
      */
     public function attributes()
     {
-        return [
-            'login'    => 'Id',
-        ];
+        return [];
     }
 
     protected function failedValidation(Validator $validator)

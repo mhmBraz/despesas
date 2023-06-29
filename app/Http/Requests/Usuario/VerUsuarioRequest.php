@@ -25,9 +25,7 @@ class VerUsuarioRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'id' => 'required|string',
-        ];
+        return [];
     }
 
     /**
@@ -55,9 +53,7 @@ class VerUsuarioRequest extends FormRequest
      */
     public function attributes()
     {
-        return [
-            'id' => 'Id',
-        ];
+        return [];
     }
 
     protected function failedValidation(Validator $validator)

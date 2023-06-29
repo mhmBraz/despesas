@@ -41,7 +41,7 @@ class DespesasController extends Controller
     public function show(VerDespesasRequest $request)
     {
         $criarUsuarioService = new VerDespesasService();
-        $despesa = $criarUsuarioService->handler($request->all());
+        $despesa = $criarUsuarioService->handler($request->expense);
 
         return Response::json([
             'success' => true,
@@ -60,7 +60,7 @@ class DespesasController extends Controller
     public function update(EditarDespesasRequest $request)
     {
         $criarUsuarioService = new EditarDespesasService();
-        $criarUsuarioService->handler($request->all());
+        $criarUsuarioService->handler($request->all(), $request->expense);
 
         return Response::json([
             'success' => true,
@@ -77,7 +77,7 @@ class DespesasController extends Controller
     public function destroy(DeletarDespesasRequest $request)
     {
         $criarUsuarioService = new DeletarDespesasService();
-        $criarUsuarioService->handler($request->all());
+        $criarUsuarioService->handler($request->expense);
 
         return Response::json([
             'success' => true,

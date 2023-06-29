@@ -8,9 +8,9 @@ use Illuminate\Support\Arr;
 
 class EditarUsuarioService
 {
-    public function handler(array $options)
+    public function handler(array $options, $idUsuario)
     {
-        ChecarUsuarioService::handler($options);
+        ChecarUsuarioService::handler($idUsuario);
 
         try {
             $password = bcrypt(Arr::get($options, 'password'));
@@ -23,6 +23,7 @@ class EditarUsuarioService
         }
 
         try {
+            Arr::set($options, 'idUsuario', $idUsuario);
             $usuarioRepo = new UsuarioRepo();
             $usuarioRepo->update($options);
         } catch (\Throwable $th) {

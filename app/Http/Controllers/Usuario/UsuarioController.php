@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Usuario\CriarUsuarioRequest;
-use App\Http\Requests\Usuario\DeletarUsuarioRequest;
 use App\Http\Requests\Usuario\EditarUsuarioRequest;
 use App\Http\Requests\Usuario\VerUsuarioRequest;
 use App\Services\Usuarios\CriarUsuarioService;
-use App\Services\Usuarios\DeletarUsuarioService;
 use App\Services\Usuarios\EditarUsuarioService;
 use App\Services\Usuarios\VerUsuarioService;
 use Illuminate\Support\Facades\Response;
@@ -41,12 +39,12 @@ class UsuarioController extends Controller
     public function show(VerUsuarioRequest $request)
     {
         $criarUsuarioService = new VerUsuarioService();
-        $data = $criarUsuarioService->handler($request->all());
+        $data = $criarUsuarioService->handler($request->user);
 
         return Response::json([
             'success' => true,
             'message' => 'Sucesso',
-            'data' => $data
+            'data' => $data ?? 'Nenhum dado encontrado'
         ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
@@ -60,28 +58,11 @@ class UsuarioController extends Controller
     public function update(EditarUsuarioRequest $request)
     {
         $criarUsuarioService = new EditarUsuarioService();
-        $criarUsuarioService->handler($request->all());
+        $criarUsuarioService->handler($request->all(), $request->user);
 
         return Response::json([
             'success' => true,
             'message' => 'Sucesso, usuário editado com sucesso',
-        ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(DeletarUsuarioRequest $request)
-    {
-        $criarUsuarioService = new DeletarUsuarioService();
-        $criarUsuarioService->handler($request->all());
-
-        return Response::json([
-            'success' => true,
-            'message' => 'Sucesso, usuário deletado com sucesso',
         ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }

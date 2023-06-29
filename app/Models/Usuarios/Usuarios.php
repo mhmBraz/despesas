@@ -33,5 +33,6 @@ class Usuarios extends Authenticatable implements JWTSubject
         'id',
         'login',
         'password',
+        'email'
     ];
 }

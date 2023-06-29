@@ -13,6 +13,7 @@ class CriarUsuarioService
         try {
             $usuarioRepo = new UsuarioRepo();
             $checarLogin = $usuarioRepo->usuarioPorLogin(Arr::get($options, 'login'));
+            $checarEmail = $usuarioRepo->usuarioPorEmail(Arr::get($options, 'email'));
         } catch (\Throwable $th) {
             throw new HttpResponseException(response()->json([
                 'message' => 'Erro, entre em contato com o Administrador.',
@@ -20,9 +21,9 @@ class CriarUsuarioService
             ], 403, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE));
         }
 
-        if ($checarLogin) {
+        if ($checarLogin || $checarEmail) {
             throw new HttpResponseException(response()->json([
-                'message' => 'Aviso, login digitado já existe.',
+                'message' => 'Aviso, login/email digitado já existe.',
                 'success' => false
             ], 403, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE));
         }

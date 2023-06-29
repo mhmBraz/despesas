@@ -26,7 +26,6 @@ class EditarUsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'       => 'required|uuid',
             'password' => 'required|string',
         ];
     }
@@ -57,7 +56,6 @@ class EditarUsuarioRequest extends FormRequest
     public function attributes()
     {
         return [
-            'id'     => 'Id',
             'passoword' => 'Senha'
         ];
     }

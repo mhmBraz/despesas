@@ -26,7 +26,7 @@ class VerDespesasRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|uuid',
+           
         ];
     }
 
@@ -56,7 +56,7 @@ class VerDespesasRequest extends FormRequest
     public function attributes()
     {
         return [
-            'id' => 'Id',
+       
         ];
     }
 

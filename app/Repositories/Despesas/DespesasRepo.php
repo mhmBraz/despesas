@@ -8,24 +8,24 @@ use Illuminate\Support\Str;
 
 class DespesasRepo
 {
-    public function verDespesa(array $options = null)
+    public function verDespesa($idDespesa)
     {
-        return Despesas::query()->where('id', '=', Arr::get($options, 'id'))->with(['usuario'])->first();
+        return Despesas::query()->where('id', '=', $idDespesa)->with(['usuario'])->first();
     }
 
     public function update(array $options)
     {
-        $despesa = $this->verDespesa($options);
+        $despesa = $this->verDespesa(Arr::get($options, 'idDespesa'));
         $despesa->descricao = Arr::get($options, 'descricao');
         $despesa->data = Arr::get($options, 'data');
         $despesa->valor = Arr::get($options, 'valor');
         $despesa->save();
     }
 
-    public function delete(array $options)
+    public function delete($idDespesa)
     {
-        $despesa = $this->verDespesa($options);
-        $despesa->save();
+        $despesa = $this->verDespesa($idDespesa);
+        $despesa->delete();
     }
 
     public function store(array $options)

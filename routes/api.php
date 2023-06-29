@@ -24,7 +24,9 @@ Route::post('/store', [UsuarioController::class, 'store']);
 
 Route::group(['middleware' => 'auth-jwt'], function () {
     Route::resource('users', UsuarioController::class, [
-        'only' => ['show', 'update', 'destroy']
+        'only' => ['show', 'update']
     ]);
-    Route::resource('expenses', DespesasController::class);
+    Route::resource('expenses', DespesasController::class, [
+        'only' => ['show', 'update', 'destroy','store']
+    ]);
 });
