@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Services\Usuarios;
+namespace App\Services\Despesas;
 
-use App\Repositories\Usuarios\UsuarioRepo;
+use App\Repositories\Despesas\DespesasRepo;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Arr;
 
-class EditarUsuarioService
+class ChecarUsuarioDespesasService
 {
-    public function handler(array $options)
+    static function handler(array $options)
     {
-        ChecarUsuarioService::handler($options);
-
         try {
-            $password = bcrypt(Arr::get($options, 'password'));
-            Arr::set($options, 'password', $password);
+            $despesasRepo = new DespesasRepo();
+            $despesa = $despesasRepo->verDespesa($options)->toArray();
         } catch (\Throwable $th) {
             throw new HttpResponseException(response()->json([
                 'message' => 'Erro, entre em contato com o Administrador.',
@@ -22,12 +20,9 @@ class EditarUsuarioService
             ], 403, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE));
         }
 
-        try {
-            $usuarioRepo = new UsuarioRepo();
-            $usuarioRepo->update($options);
-        } catch (\Throwable $th) {
+        if (auth()->payload()->get('sub') != Arr::get($despesa, 'usuario_id')) {
             throw new HttpResponseException(response()->json([
-                'message' => 'Erro, entre em contato com o Administrador.',
+                'message' => 'Erro, Você não tem permissão.',
                 'success' => false
             ], 403, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE));
         }
