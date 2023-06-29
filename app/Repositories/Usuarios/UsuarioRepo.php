@@ -20,14 +20,14 @@ class UsuarioRepo
 
     public function update(array $options)
     {
-        $usuario = $this->usuarioPorLogin(Arr::get($options, 'login'));
+        $usuario = $this->usuarioPorId(Arr::get($options, 'id'));
         $usuario->password = Arr::get($options, 'password');
         $usuario->save();
     }
 
     public function delete(array $options)
     {
-        $usuario = $this->usuarioPorLogin(Arr::get($options, 'login'));
+        $usuario = $this->usuarioPorId(Arr::get($options, 'id'));
         $usuario->delete();
     }
 

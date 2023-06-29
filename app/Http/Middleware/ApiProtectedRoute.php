@@ -3,14 +3,14 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Services\Auth\Exception\AuthExceptionService;
 
 class ApiProtectedRoute extends BaseMiddleware
 {
-   /**
+    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -21,10 +21,11 @@ class ApiProtectedRoute extends BaseMiddleware
     {
         try {
             JWTAuth::parseToken()->authenticate();
-        }
-        catch (\Exception $e) {
-            $jwtException = (new AuthExceptionService($e))->getType();
-            return $jwtException->response();
+        } catch (\Exception $e) {
+            throw new HttpResponseException(response()->json([
+                'message' => $e->getMessage(),
+                'success' => false
+            ], 403, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE));
         }
 
         return $next($request);
