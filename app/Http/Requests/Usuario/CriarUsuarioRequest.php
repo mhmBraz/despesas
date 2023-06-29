@@ -28,6 +28,7 @@ class CriarUsuarioRequest extends FormRequest
         return [
             'login'    => 'required|string',
             'password' => 'required|string',
+            'email'    => 'required|string',
         ];
     }
 
@@ -59,6 +60,7 @@ class CriarUsuarioRequest extends FormRequest
         return [
             'login'    => 'Login',
             'password' => 'Password',
+            'email'    => 'Email',
         ];
     }
 

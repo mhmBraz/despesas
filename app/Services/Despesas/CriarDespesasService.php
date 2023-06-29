@@ -2,11 +2,14 @@
 
 namespace App\Services\Despesas;
 
+use App\Models\Usuarios\Usuarios;
+use App\Notifications\EnviarEmail;
 use App\Repositories\Despesas\DespesasRepo;
 use App\Repositories\Usuarios\UsuarioRepo;
 use Carbon\Carbon;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Notification;
 
 class CriarDespesasService
 {
@@ -31,7 +34,12 @@ class CriarDespesasService
         try {
             $despesasRepo = new DespesasRepo();
             $despesasRepo->store($options);
+
+            $usuario = new UsuarioRepo();
+            $usuario = $usuario->usuarioPorId(Arr::get($options, 'usuario_id'));
+            Notification::send($usuario, new EnviarEmail($options));
         } catch (\Throwable $th) {
+            dd($th);
             throw new HttpResponseException(response()->json([
                 'message' => 'Erro, entre em contato com o Administrador.',
                 'success' => false

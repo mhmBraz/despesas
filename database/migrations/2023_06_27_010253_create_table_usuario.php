@@ -17,6 +17,7 @@ class CreateTableUsuario extends Migration
             $table->uuid('id')->primary();
             $table->text('login');
             $table->text('password');
+            $table->text('email');
         });
     }
 
